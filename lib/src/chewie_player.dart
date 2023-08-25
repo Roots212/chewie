@@ -248,6 +248,8 @@ class ChewieController extends ChangeNotifier {
     required this.videoPlayerController,
     this.optionsTranslation,
     this.aspectRatio,
+    required this.isComparing,
+    this.compareWidget,
     this.autoInitialize = false,
     this.autoPlay = false,
     this.draggableProgressBar = true,
@@ -332,6 +334,8 @@ class ChewieController extends ChangeNotifier {
     List<SystemUiOverlay>? systemOverlaysAfterFullScreen,
     List<DeviceOrientation>? deviceOrientationsAfterFullScreen,
     Duration? progressIndicatorDelay,
+    Widget? compareWidget,
+    bool? isComparing,
     Widget Function(
       BuildContext,
       Animation<double>,
@@ -341,6 +345,8 @@ class ChewieController extends ChangeNotifier {
   }) {
     return ChewieController(
       draggableProgressBar: draggableProgressBar ?? this.draggableProgressBar,
+      compareWidget: compareWidget ?? this.compareWidget,
+      isComparing: isComparing ?? this.isComparing,
       videoPlayerController:
           videoPlayerController ?? this.videoPlayerController,
       optionsTranslation: optionsTranslation ?? this.optionsTranslation,
@@ -450,6 +456,8 @@ class ChewieController extends ChangeNotifier {
 
   /// Controller to pass into the [InteractiveViewer] component
   final TransformationController? transformationController;
+  final Widget? compareWidget;
+  final bool isComparing;
 
   /// Whether or not to allow zooming and panning
   final bool zoomAndPan;

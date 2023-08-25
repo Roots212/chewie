@@ -114,6 +114,8 @@ class _ChewieDemoState extends State<ChewieDemo> {
       videoPlayerController: _videoPlayerController1,
       autoPlay: true,
       looping: true,
+      isComparing: false,
+
       progressIndicatorDelay:
           bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
 
