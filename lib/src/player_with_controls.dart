@@ -6,7 +6,11 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class PlayerWithControls extends StatelessWidget {
-  const PlayerWithControls({Key? key}) : super(key: key);
+  const PlayerWithControls(
+      {Key? key, required this.canCompare, required this.compareWidget})
+      : super(key: key);
+  final bool canCompare;
+  final Widget compareWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +34,7 @@ class PlayerWithControls extends StatelessWidget {
     }
 
     Widget buildPlayerWithControls(
-      ChewieController chewieController,
-      BuildContext context,
-    ) {
+        ChewieController chewieController, BuildContext context) {
       return Stack(
         children: <Widget>[
           if (chewieController.placeholder != null)
@@ -91,12 +93,9 @@ class PlayerWithControls extends StatelessWidget {
           aspectRatio: calculateAspectRatio(context),
           child: Column(
             children: [
-              if (chewieController.isComparing &&
-                  chewieController.compareWidget != null)
-                chewieController.compareWidget!,
+              if (canCompare) compareWidget,
               SizedBox(
-                  height: (chewieController.isComparing &&
-                          chewieController.compareWidget != null)
+                  height: (canCompare)
                       ? MediaQuery.of(context).size.height / 2
                       : MediaQuery.of(context).size.height,
                   child: buildPlayerWithControls(chewieController, context)),

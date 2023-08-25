@@ -27,11 +27,14 @@ class Chewie extends StatefulWidget {
   const Chewie({
     Key? key,
     required this.controller,
+    required this.canCompare,
+    required this.compareWidget,
   }) : super(key: key);
 
   /// The [ChewieController]
   final ChewieController controller;
-
+  final bool canCompare;
+  final Widget compareWidget;
   @override
   ChewieState createState() {
     return ChewieState();
@@ -87,7 +90,10 @@ class ChewieState extends State<Chewie> {
       controller: widget.controller,
       child: ChangeNotifierProvider<PlayerNotifier>.value(
         value: notifier,
-        builder: (context, w) => const PlayerWithControls(),
+        builder: (context, w) => PlayerWithControls(
+          canCompare: widget.canCompare,
+          compareWidget: widget.compareWidget,
+        ),
       ),
     );
   }
@@ -130,7 +136,10 @@ class ChewieState extends State<Chewie> {
       controller: widget.controller,
       child: ChangeNotifierProvider<PlayerNotifier>.value(
         value: notifier,
-        builder: (context, w) => const PlayerWithControls(),
+        builder: (context, w) => PlayerWithControls(
+          canCompare: widget.canCompare,
+          compareWidget: widget.compareWidget,
+        ),
       ),
     );
 

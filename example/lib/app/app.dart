@@ -189,6 +189,8 @@ class _ChewieDemoState extends State<ChewieDemo> {
                         _chewieController!
                             .videoPlayerController.value.isInitialized
                     ? Chewie(
+                        canCompare: false,
+                        compareWidget: SizedBox.shrink(),
                         controller: _chewieController!,
                       )
                     : const Column(
