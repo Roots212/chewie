@@ -33,8 +33,8 @@ class PlayerWithControls extends StatelessWidget {
           : const SizedBox();
     }
 
-    Widget buildPlayerWithControls(
-        ChewieController chewieController, BuildContext context) {
+    Widget buildPlayerWithControls(ChewieController chewieController,
+        bool canCompare, BuildContext context) {
       return Stack(
         children: <Widget>[
           if (chewieController.placeholder != null)
@@ -94,11 +94,7 @@ class PlayerWithControls extends StatelessWidget {
           child: Column(
             children: [
               if (canCompare) compareWidget,
-              SizedBox(
-                  height: (canCompare)
-                      ? MediaQuery.of(context).size.height / 2
-                      : MediaQuery.of(context).size.height,
-                  child: buildPlayerWithControls(chewieController, context)),
+              buildPlayerWithControls(chewieController, canCompare, context),
             ],
           ),
         ),
