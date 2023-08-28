@@ -45,6 +45,8 @@ class PlayerWithControls extends StatelessWidget {
                 ? MediaQuery.of(context).size.height / 2
                 : MediaQuery.of(context).size.height,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (canCompare) compareWidget,
                 InteractiveViewer(
