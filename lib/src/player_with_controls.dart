@@ -52,9 +52,7 @@ class PlayerWithControls extends StatelessWidget {
               scaleEnabled: chewieController.zoomAndPan,
               child: Center(
                 child: AspectRatio(
-                  aspectRatio: canCompare
-                      ? 1 / 2
-                      : (chewieController.aspectRatio ??
+                  aspectRatio: (chewieController.aspectRatio ??
                           chewieController
                               .videoPlayerController.value.aspectRatio),
                   child: VideoPlayer(chewieController.videoPlayerController),
