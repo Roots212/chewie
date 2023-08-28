@@ -36,6 +36,7 @@ class PlayerWithControls extends StatelessWidget {
     Widget buildPlayerWithControls(ChewieController chewieController,
         bool canCompare, BuildContext context) {
       return Stack(
+        fit: StackFit.expand,
         children: <Widget>[
           if (chewieController.placeholder != null)
             chewieController.placeholder!,
