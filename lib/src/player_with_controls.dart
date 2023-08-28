@@ -36,7 +36,6 @@ class PlayerWithControls extends StatelessWidget {
     Widget buildPlayerWithControls(ChewieController chewieController,
         bool canCompare, BuildContext context) {
       return Stack(
-        fit: StackFit.expand,
         children: <Widget>[
           if (chewieController.placeholder != null)
             chewieController.placeholder!,
@@ -49,12 +48,7 @@ class PlayerWithControls extends StatelessWidget {
               child: AspectRatio(
                 aspectRatio: (chewieController.aspectRatio ??
                     chewieController.videoPlayerController.value.aspectRatio),
-                child: Column(
-                  children: [
-                    VideoPlayer(chewieController.videoPlayerController),
-                    if (canCompare) compareWidget
-                  ],
-                ),
+                child: VideoPlayer(chewieController.videoPlayerController),
               ),
             ),
           ),
