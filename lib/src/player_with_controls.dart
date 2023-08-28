@@ -46,12 +46,14 @@ class PlayerWithControls extends StatelessWidget {
             scaleEnabled: chewieController.zoomAndPan,
             child: Center(
               child: AspectRatio(
-                aspectRatio: canCompare
-                    ? 1 / 2
-                    : (chewieController.aspectRatio ??
-                        chewieController
-                            .videoPlayerController.value.aspectRatio),
-                child: VideoPlayer(chewieController.videoPlayerController),
+                aspectRatio: (chewieController.aspectRatio ??
+                    chewieController.videoPlayerController.value.aspectRatio),
+                child: Column(
+                  children: [
+                    VideoPlayer(chewieController.videoPlayerController),
+                    if (canCompare) compareWidget
+                  ],
+                ),
               ),
             ),
           ),
@@ -88,18 +90,15 @@ class PlayerWithControls extends StatelessWidget {
       );
     }
 
-    return Column(children: [
-      compareWidget,
-      SizedBox(
-        height: canCompare
-            ? MediaQuery.of(context).size.height / 2
-            : MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: AspectRatio(
-          aspectRatio: calculateAspectRatio(context),
-          child: buildPlayerWithControls(chewieController, canCompare, context),
-        ),
+    return SizedBox(
+      height: canCompare
+          ? MediaQuery.of(context).size.height / 2
+          : MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: AspectRatio(
+        aspectRatio: calculateAspectRatio(context),
+        child: buildPlayerWithControls(chewieController, canCompare, context),
       ),
-    ]);
+    );
   }
 }
