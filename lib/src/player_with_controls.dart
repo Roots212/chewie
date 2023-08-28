@@ -88,8 +88,9 @@ class PlayerWithControls extends StatelessWidget {
       );
     }
 
-    return Center(
-      child: SizedBox(
+    return Column(children: [
+      compareWidget,
+      SizedBox(
         height: canCompare
             ? MediaQuery.of(context).size.height / 2
             : MediaQuery.of(context).size.height,
@@ -99,6 +100,6 @@ class PlayerWithControls extends StatelessWidget {
           child: buildPlayerWithControls(chewieController, canCompare, context),
         ),
       ),
-    );
+    ]);
   }
 }
