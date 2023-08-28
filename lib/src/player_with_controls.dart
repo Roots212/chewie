@@ -39,16 +39,22 @@ class PlayerWithControls extends StatelessWidget {
         children: <Widget>[
           if (chewieController.placeholder != null)
             chewieController.placeholder!,
-          InteractiveViewer(
-            transformationController: chewieController.transformationController,
-            maxScale: chewieController.maxScale,
-            panEnabled: chewieController.zoomAndPan,
-            scaleEnabled: chewieController.zoomAndPan,
-            child: Center(
-              child: AspectRatio(
-                aspectRatio: (chewieController.aspectRatio ??
-                    chewieController.videoPlayerController.value.aspectRatio),
-                child: VideoPlayer(chewieController.videoPlayerController),
+          SizedBox(
+            height: canCompare
+                ? MediaQuery.of(context).size.height / 2
+                : MediaQuery.of(context).size.height,
+            child: InteractiveViewer(
+              transformationController:
+                  chewieController.transformationController,
+              maxScale: chewieController.maxScale,
+              panEnabled: chewieController.zoomAndPan,
+              scaleEnabled: chewieController.zoomAndPan,
+              child: Center(
+                child: AspectRatio(
+                  aspectRatio: (chewieController.aspectRatio ??
+                      chewieController.videoPlayerController.value.aspectRatio),
+                  child: VideoPlayer(chewieController.videoPlayerController),
+                ),
               ),
             ),
           ),
