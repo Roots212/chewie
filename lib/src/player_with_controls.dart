@@ -44,30 +44,22 @@ class PlayerWithControls extends StatelessWidget {
             height: canCompare
                 ? MediaQuery.of(context).size.height / 2
                 : MediaQuery.of(context).size.height,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (canCompare) compareWidget,
-                InteractiveViewer(
-                  transformationController:
-                      chewieController.transformationController,
-                  maxScale: chewieController.maxScale,
-                  panEnabled: chewieController.zoomAndPan,
-                  scaleEnabled: chewieController.zoomAndPan,
-                  child: Center(
-                    child: AspectRatio(
-                      aspectRatio: canCompare
-                          ? 1 / 2
-                          : (chewieController.aspectRatio ??
-                              chewieController
-                                  .videoPlayerController.value.aspectRatio),
-                      child:
-                          VideoPlayer(chewieController.videoPlayerController),
-                    ),
-                  ),
+            child: InteractiveViewer(
+              transformationController:
+                  chewieController.transformationController,
+              maxScale: chewieController.maxScale,
+              panEnabled: chewieController.zoomAndPan,
+              scaleEnabled: chewieController.zoomAndPan,
+              child: Center(
+                child: AspectRatio(
+                  aspectRatio: canCompare
+                      ? 1 / 2
+                      : (chewieController.aspectRatio ??
+                          chewieController
+                              .videoPlayerController.value.aspectRatio),
+                  child: VideoPlayer(chewieController.videoPlayerController),
                 ),
-              ],
+              ),
             ),
           ),
           if (chewieController.overlay != null) chewieController.overlay!,
