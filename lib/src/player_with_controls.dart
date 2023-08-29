@@ -41,9 +41,7 @@ class PlayerWithControls extends StatelessWidget {
             chewieController.placeholder!,
           SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: canCompare
-                ? MediaQuery.of(context).size.height / 2
-                : MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height,
             child: InteractiveViewer(
               transformationController:
                   chewieController.transformationController,
@@ -94,9 +92,7 @@ class PlayerWithControls extends StatelessWidget {
     }
 
     return SizedBox(
-      height: canCompare
-          ? MediaQuery.of(context).size.height / 2
-          : MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: AspectRatio(
         aspectRatio: calculateAspectRatio(context),
