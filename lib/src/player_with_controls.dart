@@ -41,6 +41,35 @@ class PlayerWithControls extends StatelessWidget {
             chewieController.placeholder!,
           if (chewieController.topControls != null)
             chewieController.topControls!,
+          if (chewieController.bottomControls != null)
+            chewieController.bottomControls!,
+          if (chewieController.overlay != null) chewieController.overlay!,
+          if (Theme.of(context).platform != TargetPlatform.iOS)
+            Consumer<PlayerNotifier>(
+              builder: (
+                BuildContext context,
+                PlayerNotifier notifier,
+                Widget? widget,
+              ) =>
+                  Visibility(
+                visible: !notifier.hideStuff,
+                child: AnimatedOpacity(
+                  opacity: notifier.hideStuff ? 0.0 : 0.8,
+                  duration: const Duration(
+                    milliseconds: 250,
+                  ),
+                  child: SizedBox.expand(),
+                ),
+              ),
+            ),
+          if (chewieController.topControls == null)
+            if (!chewieController.isFullScreen)
+              buildControls(context, chewieController)
+            else
+              SafeArea(
+                bottom: false,
+                child: buildControls(context, chewieController),
+              ),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -62,17 +91,6 @@ class PlayerWithControls extends StatelessWidget {
                           VideoPlayer(chewieController.videoPlayerController))),
             ),
           ),
-          if (chewieController.bottomControls != null)
-            chewieController.bottomControls!,
-          if (chewieController.overlay != null) chewieController.overlay!,
-          if (chewieController.topControls == null)
-            if (!chewieController.isFullScreen)
-              buildControls(context, chewieController)
-            else
-              SafeArea(
-                bottom: false,
-                child: buildControls(context, chewieController),
-              ),
         ],
       );
     }
@@ -80,10 +98,7 @@ class PlayerWithControls extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: AspectRatio(
-        aspectRatio: calculateAspectRatio(context),
-        child: buildPlayerWithControls(chewieController, canCompare, context),
-      ),
+      child: buildPlayerWithControls(chewieController, canCompare, context),
     );
   }
 }
