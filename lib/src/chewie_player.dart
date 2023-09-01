@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:chewie/src/chewie_progress_colors.dart';
 import 'package:chewie/src/models/option_item.dart';
@@ -578,6 +579,9 @@ class ChewieController extends ChangeNotifier {
     if ((autoInitialize || autoPlay) &&
         !videoPlayerController.value.isInitialized) {
       await videoPlayerController.initialize();
+      log("Video Controller initialised");
+    
+      
     }
 
     if (autoPlay) {
