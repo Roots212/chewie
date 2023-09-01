@@ -264,6 +264,8 @@ class ChewieController extends ChangeNotifier {
     this.draggableProgressBar = true,
     this.startAt,
     this.looping = false,
+    this.topControls,
+    this.bottomControls,
     this.fullScreenByDefault = false,
     this.cupertinoProgressColors,
     this.materialProgressColors,
@@ -328,6 +330,8 @@ class ChewieController extends ChangeNotifier {
     Subtitles? subtitle,
     Widget Function(BuildContext, dynamic)? subtitleBuilder,
     Widget? customControls,
+    Widget? topControls,
+    Widget? bottomControls,
     Widget Function(BuildContext, String)? errorBuilder,
     bool? allowedScreenSleep,
     bool? isLive,
@@ -429,6 +433,8 @@ class ChewieController extends ChangeNotifier {
     BuildContext context,
     List<OptionItem> chewieOptions,
   )? optionsBuilder;
+  final Widget? topControls;
+  final Widget? bottomControls;
 
   /// Add your own additional options on top of chewie options
   final List<OptionItem> Function(BuildContext context)? additionalOptions;

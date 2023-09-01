@@ -39,27 +39,31 @@ class PlayerWithControls extends StatelessWidget {
         children: <Widget>[
           if (chewieController.placeholder != null)
             chewieController.placeholder!,
+          if (chewieController.topControls != null)
+            chewieController.topControls!,
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: IgnorePointer(
-              child: InteractiveViewer(
-                transformationController:
-                    chewieController.transformationController,
-                maxScale: chewieController.maxScale,
-                panEnabled: chewieController.zoomAndPan,
-                scaleEnabled: chewieController.zoomAndPan,
-                child: Center(
-                  child: AspectRatio(
-                    aspectRatio: (chewieController.aspectRatio ??
-                        chewieController
-                            .videoPlayerController.value.aspectRatio),
-                    child: VideoPlayer(chewieController.videoPlayerController),
-                  ),
-                ),
-              ),
+            child: InteractiveViewer(
+              transformationController:
+                  chewieController.transformationController,
+              maxScale: chewieController.maxScale,
+              panEnabled: chewieController.zoomAndPan,
+              scaleEnabled: chewieController.zoomAndPan,
+              child: FittedBox(
+                  fit: BoxFit.fitHeight,
+                  clipBehavior: Clip.antiAlias,
+                  child: SizedBox(
+                      height: chewieController
+                          .videoPlayerController.value.size.height,
+                      width: chewieController
+                          .videoPlayerController.value.size.width,
+                      child:
+                          VideoPlayer(chewieController.videoPlayerController))),
             ),
           ),
+          if (chewieController.bottomControls != null)
+            chewieController.bottomControls!,
           if (chewieController.overlay != null) chewieController.overlay!,
           if (Theme.of(context).platform != TargetPlatform.iOS)
             Consumer<PlayerNotifier>(
@@ -82,13 +86,14 @@ class PlayerWithControls extends StatelessWidget {
                 ),
               ),
             ),
-          if (!chewieController.isFullScreen)
-            buildControls(context, chewieController)
-          else
-            SafeArea(
-              bottom: false,
-              child: buildControls(context, chewieController),
-            ),
+          if (chewieController.topControls == null)
+            if (!chewieController.isFullScreen)
+              buildControls(context, chewieController)
+            else
+              SafeArea(
+                bottom: false,
+                child: buildControls(context, chewieController),
+              ),
         ],
       );
     }
