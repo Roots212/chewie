@@ -86,10 +86,8 @@ class PlayerWithControls extends StatelessWidget {
                   fit: BoxFit.fitHeight,
                   clipBehavior: Clip.antiAlias,
                   child: SizedBox(
-                      height: chewieController
-                          .videoPlayerController.value.size.height,
-                      width: chewieController
-                          .videoPlayerController.value.size.width,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
                       child:
                           VideoPlayer(chewieController.videoPlayerController))),
             ),
