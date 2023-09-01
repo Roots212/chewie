@@ -39,8 +39,6 @@ class PlayerWithControls extends StatelessWidget {
         children: <Widget>[
           if (chewieController.placeholder != null)
             chewieController.placeholder!,
-          if (chewieController.topControls != null)
-            chewieController.topControls!,
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -60,6 +58,8 @@ class PlayerWithControls extends StatelessWidget {
                           VideoPlayer(chewieController.videoPlayerController))),
             ),
           ),
+          if (chewieController.topControls != null)
+            chewieController.topControls!,
           if (chewieController.bottomControls != null)
             chewieController.bottomControls!,
           if (chewieController.overlay != null) chewieController.overlay!,
