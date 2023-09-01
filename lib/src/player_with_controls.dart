@@ -41,6 +41,27 @@ class PlayerWithControls extends StatelessWidget {
             chewieController.placeholder!,
           if (chewieController.topControls != null)
             chewieController.topControls!,
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: InteractiveViewer(
+              transformationController:
+                  chewieController.transformationController,
+              maxScale: chewieController.maxScale,
+              panEnabled: chewieController.zoomAndPan,
+              scaleEnabled: chewieController.zoomAndPan,
+              child: FittedBox(
+                  fit: BoxFit.fitHeight,
+                  clipBehavior: Clip.antiAlias,
+                  child: SizedBox(
+                      height: chewieController
+                          .videoPlayerController.value.size.height,
+                      width: chewieController
+                          .videoPlayerController.value.size.width,
+                      child:
+                          VideoPlayer(chewieController.videoPlayerController))),
+            ),
+          ),
           if (chewieController.bottomControls != null)
             chewieController.bottomControls!,
           if (chewieController.overlay != null) chewieController.overlay!,
@@ -58,7 +79,10 @@ class PlayerWithControls extends StatelessWidget {
                   duration: const Duration(
                     milliseconds: 250,
                   ),
-                  child: SizedBox.expand(),
+                  child: const DecoratedBox(
+                    decoration: BoxDecoration(color: Colors.black54),
+                    child: SizedBox.expand(),
+                  ),
                 ),
               ),
             ),
@@ -70,21 +94,6 @@ class PlayerWithControls extends StatelessWidget {
                 bottom: false,
                 child: buildControls(context, chewieController),
               ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: InteractiveViewer(
-              transformationController:
-                  chewieController.transformationController,
-              maxScale: chewieController.maxScale,
-              panEnabled: chewieController.zoomAndPan,
-              scaleEnabled: chewieController.zoomAndPan,
-              child: FittedBox(
-                  fit: BoxFit.fitHeight,
-                  clipBehavior: Clip.antiAlias,
-                  child: VideoPlayer(chewieController.videoPlayerController)),
-            ),
-          ),
         ],
       );
     }
@@ -92,7 +101,10 @@ class PlayerWithControls extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: buildPlayerWithControls(chewieController, canCompare, context),
+      child: AspectRatio(
+        aspectRatio: calculateAspectRatio(context),
+        child: buildPlayerWithControls(chewieController, canCompare, context),
+      ),
     );
   }
 }
