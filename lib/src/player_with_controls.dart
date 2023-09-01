@@ -41,6 +41,25 @@ class PlayerWithControls extends StatelessWidget {
             chewieController.placeholder!,
           if (chewieController.topControls != null)
             chewieController.topControls!,
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: InteractiveViewer(
+              transformationController:
+                  chewieController.transformationController,
+              maxScale: chewieController.maxScale,
+              panEnabled: chewieController.zoomAndPan,
+              scaleEnabled: chewieController.zoomAndPan,
+              child: FittedBox(
+                  fit: BoxFit.fitHeight,
+                  clipBehavior: Clip.antiAlias,
+                  child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      child:
+                          VideoPlayer(chewieController.videoPlayerController))),
+            ),
+          ),
           if (chewieController.bottomControls != null)
             chewieController.bottomControls!,
           if (chewieController.overlay != null) chewieController.overlay!,
@@ -73,25 +92,6 @@ class PlayerWithControls extends StatelessWidget {
                 bottom: false,
                 child: buildControls(context, chewieController),
               ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: InteractiveViewer(
-              transformationController:
-                  chewieController.transformationController,
-              maxScale: chewieController.maxScale,
-              panEnabled: chewieController.zoomAndPan,
-              scaleEnabled: chewieController.zoomAndPan,
-              child: FittedBox(
-                  fit: BoxFit.fitHeight,
-                  clipBehavior: Clip.antiAlias,
-                  child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      child:
-                          VideoPlayer(chewieController.videoPlayerController))),
-            ),
-          ),
         ],
       );
     }
