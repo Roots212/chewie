@@ -64,10 +64,13 @@ class PlayerWithControls extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
               child: chewieController.topControls!),
           if (chewieController.bottomControls != null)
-            SizedBox(
-               height: 200,
-                width: MediaQuery.of(context).size.width,
-              child: chewieController.bottomControls!),
+            Positioned(
+              bottom: 200,
+              child: SizedBox(
+                 height: 250,
+                  width: MediaQuery.of(context).size.width,
+                child: chewieController.bottomControls!),
+            ),
           if (chewieController.overlay != null) chewieController.overlay!,
           if (Theme.of(context).platform != TargetPlatform.iOS)
             Consumer<PlayerNotifier>(
