@@ -41,27 +41,6 @@ class PlayerWithControls extends StatelessWidget {
             chewieController.placeholder!,
           if (chewieController.topControls != null)
             chewieController.topControls!,
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: InteractiveViewer(
-              transformationController:
-                  chewieController.transformationController,
-              maxScale: chewieController.maxScale,
-              panEnabled: chewieController.zoomAndPan,
-              scaleEnabled: chewieController.zoomAndPan,
-              child: FittedBox(
-                  fit: BoxFit.fitHeight,
-                  clipBehavior: Clip.antiAlias,
-                  child: SizedBox(
-                      height: chewieController
-                          .videoPlayerController.value.size.height,
-                      width: chewieController
-                          .videoPlayerController.value.size.width,
-                      child:
-                          VideoPlayer(chewieController.videoPlayerController))),
-            ),
-          ),
           if (chewieController.bottomControls != null)
             chewieController.bottomControls!,
           if (chewieController.overlay != null) chewieController.overlay!,
@@ -94,6 +73,27 @@ class PlayerWithControls extends StatelessWidget {
                 bottom: false,
                 child: buildControls(context, chewieController),
               ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: InteractiveViewer(
+              transformationController:
+                  chewieController.transformationController,
+              maxScale: chewieController.maxScale,
+              panEnabled: chewieController.zoomAndPan,
+              scaleEnabled: chewieController.zoomAndPan,
+              child: FittedBox(
+                  fit: BoxFit.fitHeight,
+                  clipBehavior: Clip.antiAlias,
+                  child: SizedBox(
+                      height: chewieController
+                          .videoPlayerController.value.size.height,
+                      width: chewieController
+                          .videoPlayerController.value.size.width,
+                      child:
+                          VideoPlayer(chewieController.videoPlayerController))),
+            ),
+          ),
         ],
       );
     }
