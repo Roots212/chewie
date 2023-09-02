@@ -60,14 +60,14 @@ class PlayerWithControls extends StatelessWidget {
           ),
           if (chewieController.topControls != null)
             SizedBox(
-                height: 200,
+                height: chewieController.topBarHeight,
                 width: MediaQuery.of(context).size.width,
                 child: chewieController.topControls!),
           if (chewieController.bottomControls != null)
             Positioned(
               bottom: 5,
               child: SizedBox(
-                  height: 250,
+                  height: chewieController.bottomHeight,
                   width: MediaQuery.of(context).size.width,
                   child: chewieController.bottomControls!),
             ),

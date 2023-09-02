@@ -262,6 +262,8 @@ class ChewieController extends ChangeNotifier {
     this.compareWidget,
     this.autoInitialize = false,
     this.autoPlay = false,
+    required this.topBarHeight,
+    required this.bottomHeight,
     this.draggableProgressBar = true,
     this.startAt,
     this.looping = false,
@@ -348,6 +350,8 @@ class ChewieController extends ChangeNotifier {
     List<SystemUiOverlay>? systemOverlaysAfterFullScreen,
     List<DeviceOrientation>? deviceOrientationsAfterFullScreen,
     Duration? progressIndicatorDelay,
+    double? topBarHeight,
+    double? bottomHeight,
     Widget? compareWidget,
     bool? isComparing,
     Widget Function(
@@ -358,6 +362,8 @@ class ChewieController extends ChangeNotifier {
     )? routePageBuilder,
   }) {
     return ChewieController(
+      topBarHeight: topBarHeight ?? this.topBarHeight,
+      bottomHeight: bottomHeight ?? this.bottomHeight,
       draggableProgressBar: draggableProgressBar ?? this.draggableProgressBar,
       compareWidget: compareWidget ?? this.compareWidget,
       isComparing: isComparing ?? this.isComparing,
@@ -523,6 +529,9 @@ class ChewieController extends ChangeNotifier {
   /// Defines if the fullscreen control should be shown
   final bool allowFullScreen;
 
+  final double topBarHeight;
+  final double bottomHeight;
+
   /// Defines if the mute control should be shown
   final bool allowMuting;
 
@@ -580,8 +589,6 @@ class ChewieController extends ChangeNotifier {
         !videoPlayerController.value.isInitialized) {
       await videoPlayerController.initialize();
       log("Video Controller initialised");
-    
-      
     }
 
     if (autoPlay) {
