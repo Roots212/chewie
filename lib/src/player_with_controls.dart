@@ -59,19 +59,6 @@ class PlayerWithControls extends StatelessWidget {
                           VideoPlayer(chewieController.videoPlayerController))),
             ),
           ),
-          if (chewieController.topControls != null)
-            SizedBox(
-                height: chewieController.topBarHeight,
-                width: MediaQuery.of(context).size.width,
-                child: chewieController.topControls!),
-          if (chewieController.bottomControls != null)
-            Positioned(
-              bottom: 5,
-              child: SizedBox(
-                  height: chewieController.bottomHeight,
-                  width: MediaQuery.of(context).size.width,
-                  child: chewieController.bottomControls!),
-            ),
           if (chewieController.overlay != null) chewieController.overlay!,
           if (Theme.of(context).platform != TargetPlatform.iOS)
             Consumer<PlayerNotifier>(
@@ -102,6 +89,19 @@ class PlayerWithControls extends StatelessWidget {
                 bottom: false,
                 child: buildControls(context, chewieController),
               ),
+          if (chewieController.topControls != null)
+            SizedBox(
+                height: chewieController.topBarHeight,
+                width: MediaQuery.of(context).size.width,
+                child: chewieController.topControls!),
+          if (chewieController.bottomControls != null)
+            Positioned(
+              bottom: 5,
+              child: SizedBox(
+                  height: chewieController.bottomHeight,
+                  width: MediaQuery.of(context).size.width,
+                  child: chewieController.bottomControls!),
+            ),
         ],
       );
     }
