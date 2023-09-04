@@ -29,12 +29,14 @@ class Chewie extends StatefulWidget {
     Key? key,
     required this.controller,
     required this.canCompare,
+    required this.canZoom,
     required this.compareWidget,
   }) : super(key: key);
 
   /// The [ChewieController]
   final ChewieController controller;
   final bool canCompare;
+  final ValueNotifier<bool> canZoom;
   final Widget compareWidget;
   @override
   ChewieState createState() {
@@ -92,6 +94,7 @@ class ChewieState extends State<Chewie> {
       child: ChangeNotifierProvider<PlayerNotifier>.value(
         value: notifier,
         builder: (context, w) => PlayerWithControls(
+          canZoom: widget.canZoom,
           canCompare: widget.canCompare,
           compareWidget: widget.compareWidget,
         ),
@@ -138,6 +141,7 @@ class ChewieState extends State<Chewie> {
       child: ChangeNotifierProvider<PlayerNotifier>.value(
         value: notifier,
         builder: (context, w) => PlayerWithControls(
+          canZoom: widget.canZoom,
           canCompare: widget.canCompare,
           compareWidget: widget.compareWidget,
         ),

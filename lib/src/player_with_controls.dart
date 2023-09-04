@@ -8,9 +8,10 @@ import 'package:video_player/video_player.dart';
 
 class PlayerWithControls extends StatelessWidget {
   const PlayerWithControls(
-      {Key? key, required this.canCompare, required this.compareWidget})
+      {Key? key, required this.canCompare,required this.canZoom, required this.compareWidget})
       : super(key: key);
   final bool canCompare;
+  final ValueNotifier<bool>canZoom;
   final Widget compareWidget;
 
   @override
@@ -43,20 +44,28 @@ class PlayerWithControls extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: InteractiveViewer(
-              transformationController:
-                  chewieController.transformationController,
-              maxScale: chewieController.maxScale,
-              panEnabled: chewieController.zoomAndPan,
-              scaleEnabled: chewieController.zoomAndPan,
-              child: FittedBox(
-                  fit: BoxFit.fitHeight,
-                  clipBehavior: Clip.antiAlias,
-                  child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      child:
-                          VideoPlayer(chewieController.videoPlayerController))),
+            child: ValueListenableBuilder(
+              valueListenable: canZoom,
+              builder: (context,value,child) {
+                return IgnorePointer(
+                  ignoring: !value,
+                  child: InteractiveViewer(
+                    transformationController:
+                        chewieController.transformationController,
+                    maxScale: chewieController.maxScale,
+                    panEnabled: chewieController.zoomAndPan,
+                    scaleEnabled: chewieController.zoomAndPan,
+                    child: FittedBox(
+                        fit: BoxFit.fitHeight,
+                        clipBehavior: Clip.antiAlias,
+                        child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            child:
+                                VideoPlayer(chewieController.videoPlayerController))),
+                  ),
+                );
+              }
             ),
           ),
           if (chewieController.overlay != null) chewieController.overlay!,
