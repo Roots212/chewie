@@ -1,5 +1,6 @@
 import 'package:chewie/src/chewie_player.dart';
 import 'package:chewie/src/helpers/adaptive_controls.dart';
+import 'package:chewie/src/multihit_stack.dart';
 import 'package:chewie/src/notifiers/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class PlayerWithControls extends StatelessWidget {
 
     Widget buildPlayerWithControls(ChewieController chewieController,
         bool canCompare, BuildContext context) {
-      return Stack(
+      return MultiHitStack(
         children: <Widget>[
           if (chewieController.placeholder != null)
             chewieController.placeholder!,
