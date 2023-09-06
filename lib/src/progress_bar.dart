@@ -95,21 +95,13 @@ class _VideoProgressBarState extends State<VideoProgressBar> {
                 return;
               }
               _latestDraggableOffset = details.globalPosition;
+              _seekToRelativePosition(details.globalPosition);
               listener();
 
               widget.onDragUpdate?.call();
             },
             onHorizontalDragEnd: (DragEndDetails details) {
-              if (_controllerWasPlaying) {
-                controller.play();
-              }
-
-              if (_latestDraggableOffset != null) {
-                _seekToRelativePosition(_latestDraggableOffset!);
-                _latestDraggableOffset = null;
-              }
-
-              widget.onDragEnd?.call();
+             
             },
             onTapDown: (TapDownDetails details) {
               if (!controller.value.isInitialized) {
