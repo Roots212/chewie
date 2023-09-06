@@ -94,7 +94,6 @@ class _VideoProgressBarState extends State<VideoProgressBar> {
               if (!controller.value.isInitialized) {
                 return;
               }
-              _latestDraggableOffset = details.globalPosition;
               _seekToRelativePosition(details.globalPosition);
               listener();
 
