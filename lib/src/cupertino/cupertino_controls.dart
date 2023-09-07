@@ -95,7 +95,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
             children: [
               if (_displayBufferingIndicator)
                 const Center(
-                  child: CircularProgressIndicator(),
+                  child: SizedBox.shrink(),
                 )
               else
                 _buildHitArea(),

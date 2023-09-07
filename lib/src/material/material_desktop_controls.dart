@@ -87,7 +87,7 @@ class _MaterialDesktopControlsState extends State<MaterialDesktopControls>
             children: [
               if (_displayBufferingIndicator)
                 const Center(
-                  child: CircularProgressIndicator(),
+                  child: SizedBox.shrink(),
                 )
               else
                 _buildHitArea(),

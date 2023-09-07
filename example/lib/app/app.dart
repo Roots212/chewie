@@ -192,7 +192,6 @@ class _ChewieDemoState extends State<ChewieDemo> {
                             .videoPlayerController.value.isInitialized
                     ? Chewie(
                         canCompare: false,
-                         
                         canZoom: ValueNotifier(false),
                         compareWidget: SizedBox.shrink(),
                         controller: _chewieController!,
@@ -200,7 +199,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
                     : const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CircularProgressIndicator(),
+                          SizedBox.shrink(),
                           SizedBox(height: 20),
                           Text('Loading'),
                         ],
