@@ -81,11 +81,7 @@ class PlayerWithControls extends StatelessWidget {
                                     child: VideoPlayer(chewieController
                                         .videoPlayerController));
                               } else {
-                                return const Center(
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                  ),
-                                );
+                                return SizedBox.shrink();
                               }
                             },
                           )),
