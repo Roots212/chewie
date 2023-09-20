@@ -20,7 +20,12 @@ class PlayerWithControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ChewieController chewieController = ChewieController.of(context);
-
+    final ValueNotifier<bool> _isInitialised = ValueNotifier(false);
+    chewieController.videoPlayerController.addListener(() {
+      if (chewieController.videoPlayerController.value.isInitialized) {
+        _isInitialised.value = true;
+      }
+    });
     double calculateAspectRatio(BuildContext context) {
       final size = MediaQuery.of(context).size;
       final width = size.width;
@@ -61,13 +66,29 @@ class PlayerWithControls extends StatelessWidget {
                       child: FittedBox(
                           fit: BoxFit.cover,
                           clipBehavior: Clip.antiAlias,
-                          child: SizedBox(
-                              height: chewieController
-                                  .videoPlayerController.value.size.height,
-                              width: chewieController
-                                  .videoPlayerController.value.size.width,
-                              child: VideoPlayer(
-                                  chewieController.videoPlayerController))),
+                          child: ValueListenableBuilder<bool>(
+                            valueListenable: _isInitialised,
+                            builder: (context, value, child) {
+                              if (value) {
+                                return SizedBox(
+                                    height: chewieController
+                                        .videoPlayerController
+                                        .value
+                                        .size
+                                        .height,
+                                    width: chewieController
+                                        .videoPlayerController.value.size.width,
+                                    child: VideoPlayer(chewieController
+                                        .videoPlayerController));
+                              } else {
+                                return const Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                );
+                              }
+                            },
+                          )),
                     ),
                   );
                 }),
