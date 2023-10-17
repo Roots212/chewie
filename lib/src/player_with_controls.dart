@@ -69,7 +69,7 @@ class PlayerWithControls extends StatelessWidget {
                           panEnabled: chewieController.zoomAndPan,
                           scaleEnabled: chewieController.zoomAndPan,
                           child: FittedBox(
-                              fit:canCompare?BoxFit.contain: BoxFit.cover,
+                              fit: canCompare ? BoxFit.contain : BoxFit.cover,
                               clipBehavior: Clip.antiAlias,
                               child: ValueListenableBuilder<bool>(
                                 valueListenable: isInitialised,
