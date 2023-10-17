@@ -114,11 +114,9 @@ class PlayerWithControls extends StatelessWidget {
                 Widget? widget,
               ) =>
                   Visibility(
-                visible: (!notifier.hideStuff) &&
-                    chewieController.isHalf != true &&
-                    canCompare != true,
+                visible: (!notifier.hideStuff),
                 child: AnimatedOpacity(
-                  opacity: (notifier.hideStuff) ? 0.0 : 0.8,
+                  opacity: notifier.hideStuff ? 0.0 : 0.8,
                   duration: const Duration(
                     milliseconds: 250,
                   ),
