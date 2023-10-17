@@ -76,11 +76,18 @@ class PlayerWithControls extends StatelessWidget {
                                 builder: (context, value, child) {
                                   if (value) {
                                     return SizedBox(
-                                        height: chewieController
-                                            .videoPlayerController
-                                            .value
-                                            .size
-                                            .height,
+                                        height: canCompare
+                                            ? chewieController
+                                                    .videoPlayerController
+                                                    .value
+                                                    .size
+                                                    .height /
+                                                2
+                                            : chewieController
+                                                .videoPlayerController
+                                                .value
+                                                .size
+                                                .height,
                                         width: chewieController
                                             .videoPlayerController
                                             .value
