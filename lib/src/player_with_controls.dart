@@ -69,25 +69,18 @@ class PlayerWithControls extends StatelessWidget {
                           panEnabled: chewieController.zoomAndPan,
                           scaleEnabled: chewieController.zoomAndPan,
                           child: FittedBox(
-                              fit: canCompare ? BoxFit.contain : BoxFit.cover,
+                              fit: BoxFit.cover,
                               clipBehavior: Clip.antiAlias,
                               child: ValueListenableBuilder<bool>(
                                 valueListenable: isInitialised,
                                 builder: (context, value, child) {
                                   if (value) {
                                     return SizedBox(
-                                        height: canCompare
-                                            ? chewieController
-                                                    .videoPlayerController
-                                                    .value
-                                                    .size
-                                                    .height /
-                                                2
-                                            : chewieController
-                                                .videoPlayerController
-                                                .value
-                                                .size
-                                                .height,
+                                        height: chewieController
+                                            .videoPlayerController
+                                            .value
+                                            .size
+                                            .height,
                                         width: chewieController
                                             .videoPlayerController
                                             .value
