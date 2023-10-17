@@ -20,10 +20,10 @@ class PlayerWithControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ChewieController chewieController = ChewieController.of(context);
-    final ValueNotifier<bool> _isInitialised = ValueNotifier(false);
+    final ValueNotifier<bool> isInitialised = ValueNotifier(false);
     chewieController.videoPlayerController.addListener(() {
       if (chewieController.videoPlayerController.value.isInitialized) {
-        _isInitialised.value = true;
+        isInitialised.value = true;
       }
     });
     double calculateAspectRatio(BuildContext context) {
@@ -49,45 +49,55 @@ class PlayerWithControls extends StatelessWidget {
         children: <Widget>[
           if (chewieController.placeholder != null)
             chewieController.placeholder!,
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: ValueListenableBuilder(
-                valueListenable: canZoom,
-                builder: (context, value, child) {
-                  return IgnorePointer(
-                    ignoring: !value,
-                    child: InteractiveViewer(
-                      transformationController:
-                          chewieController.transformationController,
-                      maxScale: chewieController.maxScale,
-                      panEnabled: chewieController.zoomAndPan,
-                      scaleEnabled: chewieController.zoomAndPan,
-                      child: FittedBox(
-                          fit: BoxFit.cover,
-                          clipBehavior: Clip.antiAlias,
-                          child: ValueListenableBuilder<bool>(
-                            valueListenable: _isInitialised,
-                            builder: (context, value, child) {
-                              if (value) {
-                                return SizedBox(
-                                    height: chewieController
-                                        .videoPlayerController
-                                        .value
-                                        .size
-                                        .height,
-                                    width: chewieController
-                                        .videoPlayerController.value.size.width,
-                                    child: VideoPlayer(chewieController
-                                        .videoPlayerController));
-                              } else {
-                                return SizedBox.shrink();
-                              }
-                            },
-                          )),
-                    ),
-                  );
-                }),
+          Column(
+            children: [
+              if (canCompare) compareWidget,
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: canCompare
+                    ? MediaQuery.of(context).size.height / 2
+                    : MediaQuery.of(context).size.height,
+                child: ValueListenableBuilder(
+                    valueListenable: canZoom,
+                    builder: (context, value, child) {
+                      return IgnorePointer(
+                        ignoring: !value,
+                        child: InteractiveViewer(
+                          transformationController:
+                              chewieController.transformationController,
+                          maxScale: chewieController.maxScale,
+                          panEnabled: chewieController.zoomAndPan,
+                          scaleEnabled: chewieController.zoomAndPan,
+                          child: FittedBox(
+                              fit: BoxFit.cover,
+                              clipBehavior: Clip.antiAlias,
+                              child: ValueListenableBuilder<bool>(
+                                valueListenable: isInitialised,
+                                builder: (context, value, child) {
+                                  if (value) {
+                                    return SizedBox(
+                                        height: chewieController
+                                            .videoPlayerController
+                                            .value
+                                            .size
+                                            .height,
+                                        width: chewieController
+                                            .videoPlayerController
+                                            .value
+                                            .size
+                                            .width,
+                                        child: VideoPlayer(chewieController
+                                            .videoPlayerController));
+                                  } else {
+                                    return const SizedBox.shrink();
+                                  }
+                                },
+                              )),
+                        ),
+                      );
+                    }),
+              ),
+            ],
           ),
           if (chewieController.overlay != null) chewieController.overlay!,
           if (Theme.of(context).platform != TargetPlatform.iOS)
