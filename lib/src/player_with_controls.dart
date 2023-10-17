@@ -56,7 +56,9 @@ class PlayerWithControls extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: canCompare
                     ? MediaQuery.of(context).size.height / 2
-                    : MediaQuery.of(context).size.height,
+                    : (chewieController.isHalf == true)
+                        ? MediaQuery.of(context).size.height / 2
+                        : MediaQuery.of(context).size.height,
                 child: ValueListenableBuilder(
                     valueListenable: canZoom,
                     builder: (context, value, child) {
@@ -69,7 +71,11 @@ class PlayerWithControls extends StatelessWidget {
                           panEnabled: chewieController.zoomAndPan,
                           scaleEnabled: chewieController.zoomAndPan,
                           child: FittedBox(
-                              fit: canCompare ? BoxFit.contain : BoxFit.cover,
+                              fit: canCompare
+                                  ? BoxFit.contain
+                                  : (chewieController.isHalf == true)
+                                      ? BoxFit.contain
+                                      : BoxFit.cover,
                               clipBehavior: Clip.antiAlias,
                               child: ValueListenableBuilder<bool>(
                                 valueListenable: isInitialised,
