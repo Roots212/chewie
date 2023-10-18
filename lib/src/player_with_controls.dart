@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chewie/src/chewie_player.dart';
 import 'package:chewie/src/helpers/adaptive_controls.dart';
 import 'package:chewie/src/multihit_stack.dart';
@@ -81,20 +83,35 @@ class PlayerWithControls extends StatelessWidget {
                                 valueListenable: isInitialised,
                                 builder: (context, value, child) {
                                   if (value) {
-                                    return SizedBox(
-                                        height: chewieController
-                                            .videoPlayerController
-                                            .value
-                                            .size
-                                            .height,
-                                        width: chewieController
-                                            .videoPlayerController
-                                            .value
-                                            .size
-                                            .width,
-                                        child: VideoPlayer(chewieController
-                                            .videoPlayerController));
+                                    log("in un-shrinked");
+
+                                    return chewieController.isSimple == true
+                                        ? SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                (0.3),
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: VideoPlayer(chewieController
+                                                .videoPlayerController),
+                                          )
+                                        : SizedBox(
+                                            height: chewieController
+                                                .videoPlayerController
+                                                .value
+                                                .size
+                                                .height,
+                                            width: chewieController
+                                                .videoPlayerController
+                                                .value
+                                                .size
+                                                .width,
+                                            child: VideoPlayer(chewieController
+                                                .videoPlayerController));
                                   } else {
+                                    log("in shrinked");
                                     return const SizedBox.shrink();
                                   }
                                 },

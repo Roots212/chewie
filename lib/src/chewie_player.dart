@@ -261,6 +261,7 @@ class ChewieController extends ChangeNotifier {
   ChewieController({
     required this.videoPlayerController,
     this.optionsTranslation,
+    this.isSimple,
     this.isHalf,
     this.aspectRatio,
     required this.isComparing,
@@ -478,6 +479,7 @@ class ChewieController extends ChangeNotifier {
   /// Wether or not to show the controls when initializing the widget.
   final bool showControlsOnInitialize;
   final bool? isHalf;
+  final bool? isSimple;
 
   /// Whether or not to show the controls at all
   final bool showControls;
