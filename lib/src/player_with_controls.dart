@@ -22,7 +22,8 @@ class PlayerWithControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ChewieController chewieController = ChewieController.of(context);
-    final ValueNotifier<bool> isInitialised = ValueNotifier(false);
+    final ValueNotifier<bool> isInitialised = ValueNotifier(
+        chewieController.videoPlayerController.value.isInitialized);
     chewieController.videoPlayerController.addListener(() {
       if (chewieController.videoPlayerController.value.isInitialized) {
         isInitialised.value = true;
