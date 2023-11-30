@@ -64,20 +64,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
 
   @override
   Widget build(BuildContext context) {
-    if (_latestValue.hasError) {
-      return chewieController.errorBuilder != null
-          ? chewieController.errorBuilder!(
-              context,
-              chewieController.videoPlayerController.value.errorDescription!,
-            )
-          : const Center(
-              child: Icon(
-                CupertinoIcons.exclamationmark_circle,
-                color: Colors.white,
-                size: 42,
-              ),
-            );
-    }
+  
 
     final backgroundColor = widget.backgroundColor;
     final iconColor = widget.iconColor;

@@ -61,19 +61,7 @@ class _MaterialDesktopControlsState extends State<MaterialDesktopControls>
 
   @override
   Widget build(BuildContext context) {
-    if (_latestValue.hasError) {
-      return chewieController.errorBuilder?.call(
-            context,
-            chewieController.videoPlayerController.value.errorDescription!,
-          ) ??
-          const Center(
-            child: Icon(
-              Icons.error,
-              color: Colors.white,
-              size: 42,
-            ),
-          );
-    }
+ 
 
     return MouseRegion(
       onHover: (_) {
